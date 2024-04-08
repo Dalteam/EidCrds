@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eid Mubarak Wishing Card</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+    }
+    .card {
+        border: 2px solid #333;
+        padding: 20px;
+        max-width: 400px;
+        margin: 20px auto;
+        border-radius: 10px;
+    }
+</style>
+</head>
+<body>
+    <div >
+        <img src="" alt="">
+    </div>
+    <div class="card" id="card1">
+        <h2>Eid Mubarak!</h2>
+        <p>May this Eid bring joy and prosperity to you and your family, <span id="namePlaceholder"></span>.</p>
+    </div>
+    <div class="card" id="card2" style="display: none;">
+        <h2>Eid Mubarak!</h2>
+        <p>Wishing you and your loved ones a blessed Eid filled with happiness and peace, <span id="namePlaceholder"></span>.</p>
+    </div>
+
+    <label for="nameInput">Enter your name: </label>
+    <input type="text" id="nameInput" placeholder="Your Name">
+    <br><br>
+    <label for="cardSelect">Select a card: </label>
+    <select id="cardSelect" onchange="changeCard()">
+        <option value="card1">Card 1</option>
+        <option value="card2">Card 2</option>
+    </select>
+    <br><br>
+    <button onclick="generateLink()">Generate Link</button>
+
+    <div id="linkOutput" style="display: none;">
+        <p>Share this link:</p>
+        <textarea id="generatedLink" readonly></textarea>
+    </div>
+
+    <script>
+        function updateName() {
+            var name = document.getElementById('nameInput').value;
+            document.querySelectorAll('.card span#namePlaceholder').forEach(function(element) {
+                element.innerText = name;
+            });
+        }
+
+        function changeCard() {
+            var selectedCard = document.getElementById('cardSelect').value;
+            document.querySelectorAll('.card').forEach(function(element) {
+                element.style.display = 'none';
+            });
+            document.getElementById(selectedCard).style.display = 'block';
+        }
+
+        function generateLink() {
+            var name = document.getElementById('nameInput').value;
+            var card = document.getElementById('cardSelect').value;
+            var url = window.location.href.split('?')[0] + '?name=' + encodeURIComponent(name) + '&card=' + card;
+            document.getElementById('generatedLink').value = url;
+            document.getElementById('linkOutput').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
